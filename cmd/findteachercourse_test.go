@@ -1,14 +1,14 @@
 package main
 
 import (
-"github.com/gorilla/mux"
-"github.com/redefik/apigatewayweb/config"
-"github.com/redefik/apigatewayweb/microservice"
-"github.com/redefik/apigatewayweb/mock"
-"net/http"
-"net/http/httptest"
-"strconv"
-"testing"
+	"github.com/gorilla/mux"
+	"github.com/redefik/apigatewayweb/config"
+	"github.com/redefik/apigatewayweb/microservice"
+	"github.com/redefik/apigatewayweb/mock"
+	"net/http"
+	"net/http/httptest"
+	"strconv"
+	"testing"
 )
 
 // createTestGatewayFindTeacherCourse creates an http handler that handles the test requests
@@ -24,10 +24,10 @@ func createTestGatewayFindTeacherCourse() http.Handler {
 // It is assumed that exist a course with teacher matching with sequence "seq", so in this case the research has success.
 func TestFindCourseSuccess(t *testing.T) {
 
-	_ = config.SetConfiguration("../config/config-test.json")
+	_ = config.SetConfigurationFromFile("../config/config-test.json")
 
 	// generate a token to be appended to the request
-	user := microservice.User{Name: "nome", Surname: "cognome", Username: "username", Password: "password", Type:"teacher"}
+	user := microservice.User{Name: "nome", Surname: "cognome", Username: "username", Password: "password", Type: "teacher"}
 	token, _ := microservice.GenerateAccessToken(user, []byte(config.Configuration.TokenPrivateKey))
 
 	// Make the get request for course searching

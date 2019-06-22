@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/redefik/apigatewayweb/config"
@@ -10,19 +9,16 @@ import (
 	"net/http"
 )
 
-var configurationFile = flag.String("config", "config/config.json", "Location of the config file.")
-
 // healthCheck handles the requests coming from an external component responsible for verifying the status of the api
 // gateway
-func healthCheck(w http.ResponseWriter, r *http.Request) {
+func healthCheck(w http.ResponseWriter, _ *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
 func main() {
 
-	flag.Parse()
 	// Read the listening address of the gateway and the address of the other microservices
-	err := config.SetConfiguration(*configurationFile)
+	err := config.SetConfigurationFromEnvironment()
 	if err != nil {
 		log.Panicln(err)
 	}
@@ -42,5 +38,3 @@ func main() {
 	headersOk := handlers.AllowedHeaders([]string{"Accept", "Accept-Language", "Content-Type", "Set-Cookie", "Authorization"})
 	log.Fatal(http.ListenAndServe(config.Configuration.ApiGatewayAddress, handlers.CORS(originsOk, methodsOk, headersOk)(r)))
 }
-
-

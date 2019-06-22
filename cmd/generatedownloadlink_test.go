@@ -22,10 +22,10 @@ func createTestGatewayGenerateDownloadLink() http.Handler {
 // download a file from the teaching material of a course
 func TestGenerateDownloadLinkSuccess(t *testing.T) {
 
-	_ = config.SetConfiguration("../config/config-test.json")
+	_ = config.SetConfigurationFromFile("../config/config-test.json")
 
 	// generate a token to be appended to the request
-	user := microservice.User{Name: "nome", Surname: "cognome", Username: "username", Password: "password", Type:"teacher"}
+	user := microservice.User{Name: "nome", Surname: "cognome", Username: "username", Password: "password", Type: "teacher"}
 	token, _ := microservice.GenerateAccessToken(user, []byte(config.Configuration.TokenPrivateKey))
 
 	// Make the get request for course searching
@@ -51,10 +51,10 @@ func TestGenerateDownloadLinkSuccess(t *testing.T) {
 // download a file from the teaching material of a course but a file with the provided name does not exist
 func TestGenerateDownloadLinkNotFound(t *testing.T) {
 
-	_ = config.SetConfiguration("../config/config-test.json")
+	_ = config.SetConfigurationFromFile("../config/config-test.json")
 
 	// generate a token to be appended to the request
-	user := microservice.User{Name: "nome", Surname: "cognome", Username: "username", Password: "password", Type:"teacher"}
+	user := microservice.User{Name: "nome", Surname: "cognome", Username: "username", Password: "password", Type: "teacher"}
 	token, _ := microservice.GenerateAccessToken(user, []byte(config.Configuration.TokenPrivateKey))
 
 	// Make the get request for course searching
@@ -75,5 +75,3 @@ func TestGenerateDownloadLinkNotFound(t *testing.T) {
 		t.Error("Expected 404 OK but got " + strconv.Itoa(response.Code) + " " + http.StatusText(response.Code))
 	}
 }
-
-

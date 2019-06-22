@@ -22,10 +22,10 @@ func createTestGatewayGenerateUploadLink() http.Handler {
 // upload a file to the teaching material of a course
 func TestGenerateUploadLinkSuccess(t *testing.T) {
 
-	_ = config.SetConfiguration("../config/config-test.json")
+	_ = config.SetConfigurationFromFile("../config/config-test.json")
 
 	// generate a token to be appended to the request
-	user := microservice.User{Name: "nome", Surname: "cognome", Username: "username", Password: "password", Type:"teacher"}
+	user := microservice.User{Name: "nome", Surname: "cognome", Username: "username", Password: "password", Type: "teacher"}
 	token, _ := microservice.GenerateAccessToken(user, []byte(config.Configuration.TokenPrivateKey))
 
 	// Make the get request for course searching
@@ -51,10 +51,10 @@ func TestGenerateUploadLinkSuccess(t *testing.T) {
 // upload a file to the teaching material of a course but the provided filename already exists
 func TestGenerateUploadLinkConflict(t *testing.T) {
 
-	_ = config.SetConfiguration("../config/config-test.json")
+	_ = config.SetConfigurationFromFile("../config/config-test.json")
 
 	// generate a token to be appended to the request
-	user := microservice.User{Name: "nome", Surname: "cognome", Username: "username", Password: "password", Type:"teacher"}
+	user := microservice.User{Name: "nome", Surname: "cognome", Username: "username", Password: "password", Type: "teacher"}
 	token, _ := microservice.GenerateAccessToken(user, []byte(config.Configuration.TokenPrivateKey))
 
 	// Make the get request for course searching
@@ -75,5 +75,3 @@ func TestGenerateUploadLinkConflict(t *testing.T) {
 		t.Error("Expected 409 OK but got " + strconv.Itoa(response.Code) + " " + http.StatusText(response.Code))
 	}
 }
-
-
