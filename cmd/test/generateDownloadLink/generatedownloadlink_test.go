@@ -1,4 +1,4 @@
-package main
+package generateDownloadLink
 
 import (
 	"github.com/gorilla/mux"
@@ -22,7 +22,7 @@ func createTestGatewayGenerateDownloadLink() http.Handler {
 // download a file from the teaching material of a course
 func TestGenerateDownloadLinkSuccess(t *testing.T) {
 
-	_ = config.SetConfigurationFromFile("../config/config-test.json")
+	_ = config.SetConfigurationFromFile("../../../config/config-test.json")
 
 	// generate a token to be appended to the request
 	user := microservice.User{Name: "nome", Surname: "cognome", Username: "username", Password: "password", Type: "teacher"}
@@ -51,7 +51,7 @@ func TestGenerateDownloadLinkSuccess(t *testing.T) {
 // download a file from the teaching material of a course but a file with the provided name does not exist
 func TestGenerateDownloadLinkNotFound(t *testing.T) {
 
-	_ = config.SetConfigurationFromFile("../config/config-test.json")
+	_ = config.SetConfigurationFromFile("../../../config/config-test.json")
 
 	// generate a token to be appended to the request
 	user := microservice.User{Name: "nome", Surname: "cognome", Username: "username", Password: "password", Type: "teacher"}

@@ -1,4 +1,4 @@
-package main
+package getMaterials
 
 import (
 	"github.com/gorilla/mux"
@@ -22,7 +22,7 @@ func createTestGatewayGetCourseMaterials() http.Handler {
 // and the microservice responds with 200 OK, so the client response shuold be 200 too.
 func TestFindCourseMaterials(t *testing.T) {
 
-	_ = config.SetConfigurationFromFile("../config/config-test.json")
+	_ = config.SetConfigurationFromFile("../../../config/config-test.json")
 
 	// generate a token to be appended to the request
 	user := microservice.User{Name: "nome", Surname: "cognome", Username: "username", Password: "password", Type: "teacher"}

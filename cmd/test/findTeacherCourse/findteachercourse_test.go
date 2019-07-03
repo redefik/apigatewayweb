@@ -1,4 +1,4 @@
-package main
+package findTeacherCourse
 
 import (
 	"github.com/gorilla/mux"
@@ -24,7 +24,7 @@ func createTestGatewayFindTeacherCourse() http.Handler {
 // It is assumed that exist a course with teacher matching with sequence "seq", so in this case the research has success.
 func TestFindCourseSuccess(t *testing.T) {
 
-	_ = config.SetConfigurationFromFile("../config/config-test.json")
+	_ = config.SetConfigurationFromFile("../../../config/config-test.json")
 
 	// generate a token to be appended to the request
 	user := microservice.User{Name: "nome", Surname: "cognome", Username: "username", Password: "password", Type: "teacher"}
